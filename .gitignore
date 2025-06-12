@@ -18,6 +18,13 @@ logs/
 # Database files (optional - remove if you want to track db.json)
 app/database/db.json
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+
 # IDE
 .vscode/
 .idea/

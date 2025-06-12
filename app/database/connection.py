@@ -44,7 +44,6 @@ class DatabaseConnection:
         item_data['updated_at'] = datetime.now().isoformat()
         
         self.items_table.insert(item_data)
-        self.db.storage.flush()
         self._next_id += 1
         
         logger.info(f"Created item with id: {item_data['id']}")
@@ -75,7 +74,6 @@ class DatabaseConnection:
         
         update_data['updated_at'] = datetime.now().isoformat()
         self.items_table.update(update_data, Item.id == item_id)
-        self.db.storage.flush()
         
         updated_item = self.get_item(item_id)
         logger.info(f"Updated item with id: {item_id}")
@@ -89,7 +87,6 @@ class DatabaseConnection:
             return False
         
         self.items_table.remove(Item.id == item_id)
-        self.db.storage.flush()
         logger.info(f"Deleted item with id: {item_id}")
         return True
     

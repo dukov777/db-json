@@ -12,7 +12,7 @@ async def create_item(item: ItemCreate):
     logger.info(f"Creating new item: {item.name}")
     
     db = get_db_connection()
-    item_data = item.dict()
+    item_data = item.model_dump()
     created_item = db.create_item(item_data)
     
     return Item(**created_item)
@@ -45,7 +45,7 @@ async def update_item(item_id: int, item_update: ItemUpdate):
     logger.info(f"Updating item with id: {item_id}")
     
     db = get_db_connection()
-    update_data = item_update.dict(exclude_unset=True)
+    update_data = item_update.model_dump(exclude_unset=True)
     if not update_data:
         logger.warning(f"No update data provided for item: {item_id}")
         raise HTTPException(
